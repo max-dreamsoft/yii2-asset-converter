@@ -49,7 +49,7 @@ class Converter extends \yii\web\AssetConverter
     /**
      * @var string some directory in @webroot for compiled files. Will using like Yii::getAlias('@webroot/' . $this->destinationDir)
      */
-    public $destinationDir = 'compiled';
+    public $destinationDir = false;
 
     /**
      * @var string permissions to assign to $destinationDir.

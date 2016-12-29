@@ -1,6 +1,6 @@
 {
   "name": "mylistryx/yii2-asset-converter",
-  "description": "TEST"
+  "description": "TEST",
       "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "2.*",

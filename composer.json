@@ -11,7 +11,7 @@
         "yourilima/scssphp-compass": "1.*"
     },
     "autoload": {
-        "psr-0": { "nizsheanez\\assetConverter\\": "" }
+        "psr-0": { "bankir\\assetConverter\\": "" }
     },
-    "target-dir": "nizsheanez/assetConverter"
+    "target-dir": "bankir/assetConverter"
 }

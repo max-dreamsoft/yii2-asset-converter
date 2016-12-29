@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\assetConverter;
+namespace bankir\assetConverter;
 
 use Yii;
 use yii\caching\FileCache;

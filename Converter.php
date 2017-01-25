@@ -26,7 +26,7 @@ class Converter extends \yii\web\AssetConverter
             ],
         ],
         'scss' => [ // file extension to parse
-            'class' => 'bankir\assetConverter\Sass',
+            'class' => 'bankir\assetConverter\Scss',
             'output' => 'css', // parsed output file type
             'options' => [] // optional options
         ],

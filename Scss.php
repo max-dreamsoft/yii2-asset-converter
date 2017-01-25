@@ -50,6 +50,7 @@ class Scss extends Parser
      */
     public function parse($src, $dst, $options)
     {
+        $this->importPaths[] = dirname($src);
         $this->importPaths   = !empty($options['importPaths']) ? $options['importPaths'] : $this->importPaths;
         $this->enableCompass = isset($options['enableCompass']) ? $options['enableCompass'] : $this->enableCompass;
         $this->lineComments  = isset($options['lineComments']) ? $options['lineComments'] : $this->lineComments;
@@ -59,7 +60,7 @@ class Scss extends Parser
         $parser = new \Leafo\ScssPhp\Compiler();
         if (!empty($this->importPaths) && is_array($this->importPaths)) {
             $paths = [''];
-            foreach ($this->importPaths as $path) {
+            foreach (array_unique($this->importPaths) as $path) {
                 $paths[] = Yii::getAlias($path);
             }
             $parser->setImportPaths($paths);

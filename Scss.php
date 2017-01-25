@@ -57,7 +57,7 @@ class Scss extends Parser
         $this->outputStyle   = isset($options['outputStyle']) ? $options['outputStyle'] : $this->outputStyle;
         $this->outputStyle   = strtolower($this->outputStyle);
 
-        $parser = new \Leafo\ScssPhp\Compiler();
+        $parser = new Compiler();
         if (!empty($this->importPaths) && is_array($this->importPaths)) {
             $paths = [''];
             foreach (array_unique($this->importPaths) as $path) {

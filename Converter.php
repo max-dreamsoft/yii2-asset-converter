@@ -61,6 +61,7 @@ class Converter extends \yii\web\AssetConverter
      * @param string $asset the asset file path, relative to $basePath
      * @param string $basePath the directory the $asset is relative to.
      * @return string the converted asset file path, relative to $basePath.
+     * @throws Exception
      */
     public function convert($asset, $basePath)
     {

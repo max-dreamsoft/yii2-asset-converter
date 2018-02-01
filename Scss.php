@@ -161,7 +161,7 @@ class Scss extends Parser
                     for (; !isset($lines[$begin]); $begin--);
                     for ($next=$begin+1; !isset($lines[$next]); $next++);
                     $lines[$begin] .= "\n" . preg_replace('~^(\s+)*.+$~', '\1', $lines[$next]) . ltrim($line);
-                } else {
+                } elseif (isset($lines[$begin])) {
                     $lines[$begin] =  preg_replace('~^(\s+)*.+$~', '\1', $lines[$begin]) . ltrim($line) . "\n" . $lines[$begin];
                 }
             }

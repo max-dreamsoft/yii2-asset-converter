@@ -32,6 +32,11 @@ class Scss extends Parser
     public $outputStyle = 'nested';
 
     /**
+     * @var bool|\Leafo\ScssPhp\Compiler::* generate css map file
+     */
+    public $generateMap = false;
+
+    /**
      * @var array defined formatters
      */
     protected $formatters = [
@@ -55,6 +60,7 @@ class Scss extends Parser
         $this->enableCompass = isset($options['enableCompass']) ? $options['enableCompass'] : $this->enableCompass;
         $this->lineComments  = isset($options['lineComments']) ? $options['lineComments'] : $this->lineComments;
         $this->outputStyle   = isset($options['outputStyle']) ? $options['outputStyle'] : $this->outputStyle;
+        $this->generateMap  = isset($options['generateMap']) ? $options['generateMap'] : $this->generateMap;
         $this->outputStyle   = strtolower($this->outputStyle);
 
         $parser = new Compiler();
@@ -79,6 +85,23 @@ class Scss extends Parser
 
         if (!file_exists($src)) {
             throw new \Exception("Failed to open file \"$src\"");
+        }
+
+        if ($this->generateMap) {
+            if (!in_array($this->generateMap, [
+                \Leafo\ScssPhp\Compiler::SOURCE_MAP_FILE,
+                \Leafo\ScssPhp\Compiler::SOURCE_MAP_INLINE,
+            ], true)) {
+                $this->generateMap = \Leafo\ScssPhp\Compiler::SOURCE_MAP_FILE;
+            }
+            $parser->setSourceMap($this->generateMap);
+            $parser->setSourceMapOptions([
+                'sourceMapRootpath' => '', // add this to path
+                'sourceMapBasepath' => dirname($src), // remove this from path
+                'sourceMapFilename' => pathinfo($dst, PATHINFO_BASENAME),
+                'sourceMapWriteTo' => $dst . '.map',
+                'sourceMapURL' => pathinfo($dst, PATHINFO_BASENAME) . '.map',
+            ]);
         }
 
         if ($this->lineComments) {

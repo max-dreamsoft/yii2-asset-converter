@@ -14,7 +14,7 @@ YII 2.0
 ~~~php
 
 "require": {
-    "nizsheanez/yii2-asset-converter": "1.*",
+    "dreamsoft/yii2-asset-converter": "1.*",
 },
 
 php composer.phar update
@@ -27,7 +27,7 @@ php composer.phar update
     'assetManager' => [
         'bundles' => require(__DIR__ . '/assets.php'),
         'converter'=> [
-            'class'=>'nizsheanez\assetConverter\Converter',
+            'class'=>'dreamsoft\assetConverter\Converter',
         ]
     ],
 ~~~
@@ -78,24 +78,24 @@ But you can change it by destinationDir property from config
 'components' => [
 	'assetManager' => [
         'converter'=> [
-            'class'=> 'nizsheanez\assetConverter\Converter',
+            'class'=> 'dreamsoft\assetConverter\Converter',
             'force'=> false, // true : If you want convert your sass each time without time dependency
             'destinationDir' => 'compiled', //at which folder of @webroot put compiled files
             'parsers' => [
                 'sass' => [ // file extension to parse
-                    'class' => 'nizsheanez\assetConverter\Sass',
+                    'class' => 'dreamsoft\assetConverter\Sass',
                     'output' => 'css', // parsed output file type
                     'options' => [
                         'cachePath' => '@app/runtime/cache/sass-parser' // optional options
                     ],
                 ],
                 'scss' => [ // file extension to parse
-                    'class' => 'nizsheanez\assetConverter\Sass',
+                    'class' => 'dreamsoft\assetConverter\Scss',
                     'output' => 'css', // parsed output file type
                     'options' => [] // optional options
                 ],
                 'less' => [ // file extension to parse
-                    'class' => 'nizsheanez\assetConverter\Less',
+                    'class' => 'dreamsoft\assetConverter\Less',
                     'output' => 'css', // parsed output file type
                     'options' => [
                         'auto' => true, // optional options
@@ -118,13 +118,14 @@ Also, for SCSS files you can use alternate configuration:
                 'parsers' => [
                     // ...
                     'scss' => [ // file extension to parse
-                        'class' => 'nizsheanez\assetConverter\Scss',
+                        'class' => 'dreamsoft\assetConverter\Scss',
                         'output' => 'css', // parsed output file type
                         'options' => [ // optional options
                             'enableCompass' => true, // default is true
                             'importPaths' => [], // import paths, you may use path alias here, 
                                 // e.g., `['@path/to/dir', '@path/to/dir1', ...]`
                             'lineComments' => false, // if true — compiler will place line numbers in your compiled output
+                            'generateMap' => false, // if true — compiler will generate map **
                             'outputStyle' => 'nested', // May be `compressed`, `crunched`, `expanded` or `nested`,
                                 // see more at http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
                         ],
@@ -134,3 +135,9 @@ Also, for SCSS files you can use alternate configuration:
         ],
     // ...
 ~~~
+
+** possible values for generateMap are:
+* `\Leafo\ScssPhp\Compiler::SOURCE_MAP_FILE`
+* `\Leafo\ScssPhp\Compiler::SOURCE_MAP_INLINE`
+* all (bin) positive values are `SOURCE_MAP_FILE`
+* all (bin) negative values are `SOURCE_MAP_NONE`

@@ -1,5 +1,5 @@
 <?php
-namespace bankir\assetConverter;
+namespace dreamsoft\assetConverter;
 
 use Yii;
 

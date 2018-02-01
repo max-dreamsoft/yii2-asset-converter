@@ -1,12 +1,12 @@
 <?php
 
-namespace bankir\assetConverter;
+namespace dreamsoft\assetConverter;
 
 use Yii;
 
 /**
  * Class Scss
- * @package nizsheanez\assetConverter
+ * @package dreamsoft\assetConverter
  * @author Andrey Izman <izmanw@gmail.com>
  */
 class Scss extends Parser

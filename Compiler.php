@@ -1,13 +1,13 @@
 <?php
 
-namespace bankir\assetConverter;
+namespace dreamsoft\assetConverter;
 
 use Yii;
 use Leafo\ScssPhp\Compiler as ParentCompiler;
 
 /**
  * Class Scss
- * @package nizsheanez\assetConverter
+ * @package dreamsoft\assetConverter
  * @author Andrey Izman <izmanw@gmail.com>
  */
 

@@ -109,6 +109,9 @@ class Converter extends \yii\web\AssetConverter
 
     public function needRecompile($from, $to)
     {
+        if (!file_exists($to)) {
+            return true;
+        }
         return $this->force || (@filemtime($to) < filemtime($from));
     }
 

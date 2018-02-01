@@ -10,7 +10,7 @@
     "yiisoft/yii2-composer": "2.*",
     "oyejorge/less.php": "1.7.0.*",
     "richthegeek/phpsass": "1.*",
-    "leafo/scssphp": "0.7.2",
+    "leafo/scssphp": "0.7.*",
     "yourilima/scssphp-compass": "1.*"
   },
   "autoload": {

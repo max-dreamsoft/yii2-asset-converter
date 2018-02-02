@@ -11,6 +11,7 @@ namespace dreamsoft\assetConverter;
 use Yii;
 use yii\base\Exception;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 
 class Converter extends \yii\web\AssetConverter
 {
@@ -55,6 +56,11 @@ class Converter extends \yii\web\AssetConverter
      * @var string permissions to assign to $destinationDir.
      */
     public $destinationDirPerms = 0755;
+
+    /**
+     * @var bool need to check timestamps of all source siblings and children
+     */
+    public $recursiveRecompileCheck = false;
 
     /**
      * Converts a given asset file into a CSS or JS file.
@@ -110,10 +116,23 @@ class Converter extends \yii\web\AssetConverter
 
     public function needRecompile($from, $to)
     {
-        if (!file_exists($to)) {
+        if ($this->force or !file_exists($to)) {
             return true;
         }
-        return $this->force || (@filemtime($to) < filemtime($from));
+
+        if ($this->recursiveRecompileCheck) {
+            $checkList = FileHelper::findFiles(dirname($from), ['only'=>['*.css', '*.scss']]);
+            ArrayHelper::removeValue($checkList, $to);
+        } else {
+            $checkList = [$from];
+        }
+
+        foreach ($checkList as $file) {
+            if (@filemtime($to) < @filemtime($file)) {
+                return true;
+            }
+        }
+        return (@filemtime($to) < filemtime($from));
     }
 
     public function checkDestinationDir($basePath, $file)

@@ -80,7 +80,9 @@ But you can change it by destinationDir property from config
         'converter'=> [
             'class'=> 'dreamsoft\assetConverter\Converter',
             'force'=> false, // true : If you want convert your sass each time without time dependency
-            'destinationDir' => 'compiled', //at which folder of @webroot put compiled files
+            'destinationDir' => 'compiled', // at which folder of @webroot put compiled files
+            'destinationDirPerms' => 0755, // permissions to assign to destinationDir
+            'recursiveRecompileCheck' => false, // check timestamps of all source siblings and children
             'parsers' => [
                 'sass' => [ // file extension to parse
                     'class' => 'dreamsoft\assetConverter\Sass',
